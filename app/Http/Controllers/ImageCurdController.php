@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use view;
+
 use App\Models\ImageCurd;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\File;
 
 class ImageCurdController extends Controller
@@ -13,6 +14,7 @@ class ImageCurdController extends Controller
     public function index()
     {
         $selectAll = ImageCurd::all();
+
         return view('user.pages.image', compact('selectAll'));
     }
 

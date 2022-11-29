@@ -42,40 +42,59 @@
             </div>
         </div>
     </div>
+     
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
                 <table class="table table-success table-striped">
                     <thead>
-
                         <tr bg-color="red">
-
                             <th scope="col"> Id</th>
                             <th scope="col">Student Name</th>
                             <th scope="col">Image</th>
                             <th scope="col">Actions</th>
                         </tr>
-
                     </thead>
                     <tbody>
+                        @if($selectAll->count())
                         @foreach($selectAll as $students)
                         <tr>
                             <th scope="row">{{$students->id}}</th>
                             <td>{{$students->name}}</td>
                             <td>
                                 <img style="width: 100px;" src="{{asset('images/products/'.$students->image_name)}}">
-
                             </td>
-
                             <td>
                                 <a href="{{route('image.edit',$students->id)}}" class="btn btn-success">edit</a>
                                 <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Delete </a>
-
                             </td>
-
                         </tr>
-                        @endforeach
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure to delete?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a href="{{route('image.delete',$students->id)}}" class="btn btn-danger"> Yes</a>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        @else
+                            <tr>
+                                <td colspan="4" style="text-align: center;color:rgb(255, 0, 0)">No data found</td>
+                            </tr>
+
+                        @endif
+                       
                     </tbody>
                 </table>
             </div>
@@ -85,25 +104,6 @@
 
 
 
-
 @endsection
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure to delete?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="{{route('image.delete',$students->id)}}" class="btn btn-danger"> Yes</a>
-
-            </div>
-        </div>
-    </div>
-</div>
