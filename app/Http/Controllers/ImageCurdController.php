@@ -48,7 +48,6 @@ class ImageCurdController extends Controller
     }
     public function edit($id)
     {
-
         $selectedStudent = ImageCurd::find($id);
         return view('user.pages.edit', compact('selectedStudent'));
     }
