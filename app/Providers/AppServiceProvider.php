@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\FileSystemRepositoryServices;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('FileSystemRepositoryServices', function ($app) {
+            return new FileSystemRepositoryServices;
+        });
     }
 
     /**

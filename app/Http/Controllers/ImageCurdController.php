@@ -23,7 +23,7 @@ class ImageCurdController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'image' => 'required | mimes:png,jpg,jpeg',
+            'image' => 'required|mimes:png,jpg,jpeg',
 
         ]);
         if ($image = $request->file('image')) {

@@ -58,6 +58,7 @@
                     <tbody>
                         @if($selectAll->count())
                         @foreach($selectAll as $students)
+                
                         <tr>
                             <th scope="row">{{$students->id}}</th>
                             <td>{{$students->name}}</td>

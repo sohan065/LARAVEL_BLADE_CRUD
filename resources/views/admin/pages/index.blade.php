@@ -13,7 +13,7 @@
             <thead>
 
                 <tr bg-color="red">
-                    <th scope="col">#</th>
+                    <th scope="col">id</th>
                     <th scope="col">Registration Id</th>
                     <th scope="col">Student Name</th>
                     <th scope="col">Department Name</th>
@@ -30,7 +30,8 @@
                     <td>{{$students->name}}</td>
                     <td>{{$students->department_name}}</td>
                     <td>{{$students->info}}</td>
-                    <td><a href="{{route('edit',$students->id)}}" class="btn btn-success">Edit</a>
+                    <td>
+                        <a href="{{route('edit',$students->id)}}" class="btn btn-success">Edit</a>
                         <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Delete </a>
                     </td>
 
