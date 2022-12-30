@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\StudentManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ImageCurdController;
+use App\Http\Controllers\StudentManagementController;
 
 Route::get('/', [StudentManagementController::class, 'index'])->name('home.page');
 
@@ -24,9 +23,7 @@ Route::post('/update/{id}', [StudentManagementController::class, 'update'])->nam
 Route::get('/delete/{id}', [StudentManagementController::class, 'delete'])->name('delete');
 
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 
 Route::get('/image', [ImageCurdController::class, 'index'])->name('image.home.page');
 Route::post('/store', [ImageCurdController::class, 'store'])->name('image.store');

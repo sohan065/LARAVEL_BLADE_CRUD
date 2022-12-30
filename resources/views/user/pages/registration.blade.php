@@ -35,13 +35,18 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Department Name</label>
-                <input type="text" class="form-control" name="department_name" id="exampleInputPassword1">
+                {{-- <input type="text" class="form-control" name="department_name" id="exampleInputPassword1"> --}}
+                <select class="form-select" name="department_name" aria-label="Default select example">
+                <option selected>select department</option>
+                @foreach($dept as $dept)
+                <option value="{{$dept->name}}">{{$dept->name}}</option>
+                @endforeach
+             </select>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Information</label>
+                <label for="exampleInputPassword1" class="form-label">Address</label>
                 <textarea class="form-control" name="info" id="exampleFormControlTextarea1" rows="3" cell="16"></textarea>
             </div>
-
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentManagement;
-use Illuminate\Auth\Events\Validated;
+use Exception;
+use App\Models\Student;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StudentManagementController extends Controller
 {
     public function index()
     {
-
-        $allstudent = StudentManagement::all();
+        $allstudent = Student::all();
         return view('user.pages.index', compact('allstudent'));
     }
+
     public function registration()
     {
-        return view('user.pages.registration');
+        return view('user.pages.registration', [
+            'dept' => Department::all(),
+        ]);
     }
 
     public function create(Request $request)
@@ -27,18 +31,39 @@ class StudentManagementController extends Controller
             'department_name' => 'required',
             'info' => 'required',
         ]);
+        try {
+            $result = Student::create([
+                'registration_id' => $request['registration_no'],
+                'name' => $request['student_name'],
+                'department_name' => $request['department_name'],
+                'info' => $request['info'],
+            ]);
+        } catch (Exception $e) {
+            Log::error($e);
+            return $e;
+            $result = false;
+        }
+        if ($result) {
+            Session()->flash('success', 'Registration successfull !!!');
+            return redirect('/');
+        }
+        return response(['message' => 'fail'], 406);
 
-        $student = new StudentManagement();
+        // $validated = $request->only(['student_name', 'registration_no', 'department_name', 'info']);
 
-        $student->registration_id = $request->registration_no;
-        $student->name = $request->student_name;
-        $student->department_name = $request->department_name;
-        $student->info = $request->info;
+        // return Student::createStudent($validated);
 
-        $student->save();
+        // $student = new Student();
 
-        Session()->flash('success', 'Registration successfull !!!');
-        return redirect('/');
+        // $student->registration_id = $request->registration_no;
+        // $student->name = $request->student_name;
+        // $student->department_name = $request->department_name;
+        // $student->info = $request->info;
+
+        // $student->save();
+
+        // Session()->flash('success', 'Registration successfull !!!');
+        // return redirect('/');
     }
     public function store()
     {
@@ -49,7 +74,7 @@ class StudentManagementController extends Controller
 
     public function edit($id)
     {
-        $selectedstudent = StudentManagement::find($id);
+        $selectedstudent = Student::find($id);
 
         return view('admin.pages.edit', compact('selectedstudent'));
     }
@@ -57,7 +82,7 @@ class StudentManagementController extends Controller
     public function update(Request $request, $id)
     {
 
-        $studentinfo = StudentManagement::find($id);
+        $studentinfo = Student::find($id);
 
         $studentinfo->name = $request->student_name;
         $studentinfo->registration_id = $request->registration_no;
@@ -78,7 +103,7 @@ class StudentManagementController extends Controller
 
     public function delete($id)
     {
-        $deleteid = StudentManagement::find($id);
+        $deleteid = Student::find($id);
 
         $result = $deleteid->delete();
         if ($result == true) {
