@@ -21,4 +21,8 @@ class DepartmentController extends Controller
         $validated = $request->only(['name', 'code']);
         return Department::storeDepartment($validated);
     }
+    public function showData()
+    {
+        return Department::showData();
+    }
 }

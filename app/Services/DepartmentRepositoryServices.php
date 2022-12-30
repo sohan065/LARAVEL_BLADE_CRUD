@@ -6,6 +6,7 @@ use App\Models\Department;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\DepartmentRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class DepartmentRepositoryServices implements DepartmentRepositoryInterface
 {
@@ -24,5 +25,12 @@ class DepartmentRepositoryServices implements DepartmentRepositoryInterface
             return response(['message' => 'created'], 201);
         }
         return response(['message' => 'fail'], 406);
+    }
+    public function showData()
+    {
+        $students = DB::table('students')
+            ->join('departments', 'students.id', '=', 'departments.id')
+            ->select('students.*', 'departments.*')
+            ->get();
     }
 }
