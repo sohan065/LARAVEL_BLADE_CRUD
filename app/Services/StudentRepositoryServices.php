@@ -15,6 +15,7 @@ class StudentRepositoryServices implements StudentRepositoryInterface
     {
         $allstudent = Student::all();
         return view('user.pages.index', compact('allstudent'));
+        // return view('newUser.layout.master');
     }
     public function registration()
     {

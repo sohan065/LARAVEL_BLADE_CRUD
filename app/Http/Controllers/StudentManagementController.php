@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class StudentManagementController extends Controller
 {
+    public function lte()
+    {
+        return view('adminNew.pages.index');
+    }
     public function index()
     {
         return Student::index();

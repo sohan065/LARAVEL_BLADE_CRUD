@@ -22,8 +22,7 @@ Route::post('/update/{id}', [StudentManagementController::class, 'update'])->nam
 
 Route::get('/delete/{id}', [StudentManagementController::class, 'delete'])->name('delete');
 
-Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/image', [ImageCurdController::class, 'index'])->name('image.home.page');
 Route::post('/store', [ImageCurdController::class, 'store'])->name('image.store');
@@ -31,3 +30,15 @@ Route::get('/imageedit/{id}', [ImageCurdController::class, 'edit'])->name('image
 
 Route::post('/image/update/{id}', [ImageCurdController::class, 'update'])->name('image.update');
 Route::get('/image/delete/{id}', [ImageCurdController::class, 'delete'])->name('image.delete');
+
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// admin LTE 
+Route::get('/lte', [StudentManagementController::class, 'lte'])->name('lte');
+
+Route::get('/brand-page', [AdminController::class, 'getAllbrand'])->name('brand');
+Route::get('/brand/store', [AdminController::class, 'storeBrand'])->name('brand.store');
+Route::post('/brand-create', [AdminController::class, 'createBrand'])->name('create.brand');
