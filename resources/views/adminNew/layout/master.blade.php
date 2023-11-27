@@ -60,6 +60,7 @@
     <!-- ./wrapper -->
 
     @include('adminNew.partials.scripts')
+    @yield('script')
 </body>
 
 </html>

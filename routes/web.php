@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageCurdController;
 use App\Http\Controllers\StudentManagementController;
 
@@ -39,6 +41,19 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // admin LTE 
 Route::get('/lte', [StudentManagementController::class, 'lte'])->name('lte');
 
-Route::get('/brand-page', [AdminController::class, 'getAllbrand'])->name('brand');
-Route::get('/brand/store', [AdminController::class, 'storeBrand'])->name('brand.store');
-Route::post('/brand-create', [AdminController::class, 'createBrand'])->name('create.brand');
+Route::prefix('brand')->group(function () {
+    Route::get('/index', [BrandController::class, 'index'])->name('brand.index');
+    Route::get('/create', [BrandController::class, 'create'])->name('brand.create');
+    Route::post('/store', [BrandController::class, 'store'])->name('brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::put('/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+});
+Route::prefix('category')->group(function () {
+    Route::get('/index', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+});

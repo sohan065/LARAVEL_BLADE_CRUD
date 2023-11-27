@@ -12,21 +12,21 @@ use App\Http\Requests\BrandCreateRequest;
 class AdminController extends Controller
 {
 
-    public function createBrand(BrandCreateRequest $request)
-    {
-        $validated = $request->only(['name', 'logo']);
-        $path = FileSystem::storeFile($validated['logo'], 'brand/logo');
+    // public function createBrand(BrandCreateRequest $request)
+    // {
+    //     $validated = $request->only(['name', 'logo']);
+    //     $path = FileSystem::storeFile($validated['logo'], 'brand/logo');
 
-        try {
-            $brands =  Brand::create([
-                'name' => $validated['name'],
-                'logo' => $path,
-            ]);
-        } catch (Exception $e) {
-            Log::error($e);
-        }
-        return view('adminNew.pages.index');
-    }
+    //     try {
+    //         $brands =  Brand::create([
+    //             'name' => $validated['name'],
+    //             'logo' => $path,
+    //         ]);
+    //     } catch (Exception $e) {
+    //         Log::error($e);
+    //     }
+    //     return view('adminNew.pages.index');
+    // }
 
     public function storeBrand()
     {
@@ -37,7 +37,6 @@ class AdminController extends Controller
         $brands = Brand::all();
         return view('adminNew.pages.brand', compact('brands'));
     }
-
 
     public function index()
     {
